@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>requestAnimationFrame DEMO 1</title>
+    <style type="text/css">
+        .bar{width:200px;height:10px;margin:20px;background-color:blue;}
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            (function(){
+                var lastTime = 0;
+                var vendors = ['webkit', 'moz'];
+
+                for(var x =0; x < vendors.length && !window.requestAnimationFrame; x++){
+                    window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+                    //window.cancelRequestAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] ||
+                    //                                    window[vendors[x] + 'CancelRequestAnimationFrame']
+                }
+
+                if(!window.requestAnimationFrame){
+                    window.requestAnimationFrame = function(callback, element) {
+                        var currTime = new Date().getTime();
+                        var timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
+                        var id = window.setTimeout(function() {
+                            callback(currTime + timeToCall);
+                        }, timeToCall);
+                        lastTime = currTime + timeToCall;
+                        return id;
+                    };
+                }
+
+                if (!window.cancelAnimationFrame) {
+                    window.cancelAnimationFrame = function(id) {
+                        clearTimeout(id);
+                    };
+                }
+            }());
+
+            var el = document.getElementsByClassName('bar')[0];
+
+            var render = function(){
+                var width = parseInt(window.getComputedStyle(el, null).getPropertyValue('width')) + 1;
+                if(width> 500)  return;
+                el.style.width =  width + 'px';
+                window.requestAnimationFrame(render);
+            };
+
+            var test = window.requestAnimationFrame(render);
+            //window.cancelAnimationFrame(test);
+        }
+    </script>
+</head>
+<body>
+    <div class="bar"></div>
+    <button type="button" onclick="cancel()">取消</button>
+</body>
+</html>
