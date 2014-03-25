@@ -1,9 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="appModule">
 <head>
-    <title></title>
+    <title>angular模</title>
+    <script type="text/javascript" src="http://cdn.staticfile.org/angular.js/1.2.10/angular.js"></script>
+    <script type="text/javascript">
+        var appModule = angular.module('appModule', []);
+
+        appModule.factory('Items', function(){
+            var items = {};
+            items.query = function(){
+                var items = [
+                    {name:'物品1'},
+                    {name:'物品2'}
+                ];
+                return items;
+            };
+
+            return items;
+        });
+
+        function appCtrl($scope,Items){
+            $scope.items = Items.query();
+        }
+    </script>
 </head>
-<body>
+<body ng-controller="appCtrl">
+    <ul>
+        <li ng-repeat="item in items">{{item.name}}</li>
+    </ul>
 
 </body>
 </html>

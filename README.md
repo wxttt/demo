@@ -9,4 +9,5 @@ demo
 ### 2014.3.25
 
 1. 增加angular $watch使用demo
+2. 增加了angular factory使用demo
 
