@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>最简单的指令</title>
+    <script type="text/javascript" src="http://cdn.staticfile.org/angular.js/1.2.10/angular.js"></script>
+    <script type="text/javascript">
+        var appModule = angular.module('app', []);
+        appModule.directive('ngbkFocus', function(){
+            return {
+                link: function(scope, element, attrs, controller){
+                    element[0].focus();
+                }
+            }
+        });
+
+        function appCtrl($scope) {
+            $scope.message = {text:'nothing clicked yet'};
+
+            $scope.clickUnfocused = function(){
+                $scope.message = {text:'unfocused button clicked'};
+            };
+
+            $scope.clickFocused = function(){
+                $scope.message = {text:'focused button clicked'};
+            }
+        }
+    </script>
+</head>
+<body ng-controller="appCtrl">
+    <button ng-click="clickUnfocused()">not focused</button>
+    <button ngbk-focus ng-click="clickFocused()">i'm very focused</button>
+    <div>{{message.text}}</div>
+</body>
+</html>
