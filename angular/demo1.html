@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app>
+<!- 温习了下$watch相关的一些东西 -->
+<head>
+    <title>测试angular $watch</title>
+    <script type="text/javascript" src="http://cdn.staticfile.org/angular.js/1.2.10/angular.js"></script>
+    <script type="text/javascript">
+        function cartCtrl($scope){
+            $scope.bill = {};
+            $scope.items = [
+                {title: 'paint pots', quantity:8, price:3.75},
+                {title: 'polka dots', quantity: 17, price: 12.95}
+            ];
+
+            $scope.totalCart = function(){
+                var total = 0;
+                for(var i = 0; i < $scope.items.length; i++){
+                    total = total + $scope.items[i].price * $scope.items[i].quantity;
+                }
+                return total;
+            };
+
+            $scope.subtotal = function(){
+                return $scope.totalCart() - $scope.bill.discount;
+            };
+
+
+
+            function calculateDiscount(newValue, oldValue, scope){
+            $scope.bill.discount = newValue > 100?10 : 0;
+            }
+
+            $scope.$watch($scope.totalCart, calculateDiscount);
+        }
+    </script>
+</head>
+<body>
+    <div ng-controller="cartCtrl">
+        <div ng-repeat="item in items">
+            <span>{{item.title}}</span>
+            <input type="text" ng-model="item.quantity"/>
+            <span>{{item.price | currency}}</span>
+            <span>{{item.price * item.quantity | currency}}</span>
+        </div>
+        <div>Total:{{totalCart() | currency}}</div>
+        <div>Discount:{{bill.discount | currency}}</div>
+        <div>Subtotal:{{subtotal() | currency}}</div>
+    </div>
+
+</body>
+</html>
