@@ -12,3 +12,6 @@ demo
 2. 增加了angular factory使用demo
 3. 增加了最简单的指令demo
 
+### 2014.3.26
+1. 增加了比较完整的指令使用demo
+

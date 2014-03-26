@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head>
+    <title>指令相关的一些</title>
+    <script type="text/javascript" src="angular.js"></script>
+    <script type="text/javascript">
+        function dirCtrl($scope){
+            $scope.expanders = [
+                {title:'title1', text:'text1'},
+                {title:'title2', text:'text2'},
+                {title:'title3', text:'text3'}
+            ]
+        }
+
+        var appModule = angular.module('appModule', []);
+
+        appModule.directive('accordion', function(){
+            return{
+                restrict: 'EA',
+                replace: true,
+                transclude: true,
+                template: '<div class="accordion" ng-transclude></div>',
+                controller: function(){
+                    var expanders = [];
+
+                    this.gotOpened = function(selectedExpander){
+                        angular.forEach(expanders, function(expander){
+                            if(selectedExpander != expander){
+                                expander.showMe = false;
+                            }
+                        })
+                    };
+
+                    this.addExpander = function(expander){
+                        expanders.push(expander);
+                    };
+                }
+            }
+        });
+
+        appModule.directive('expander', function(){
+            return {
+                restrict: 'EA',
+                replace: true,
+                transclude: true,
+                require: '^?accordion',
+                scope: {title: '=expanderTitle'},
+                template: '<div>' +
+                        '<div class="title" ng-click="toggle()">{{title}}</div>' +
+                        '<div class="body" ng-show="showMe" ng-transclude></div>' +
+                        ' </div>',
+                link: function(scope, element, attrs, accordionController){
+                    scope.showMe = false;
+                    console.log(accordionController);
+                    accordionController.addExpander(scope);
+
+                    scope.toggle = function(){
+                        console.log('toggle')
+                        scope.showMe = !scope.showMe;
+                        accordionController.gotOpened(scope);
+                    }
+                }
+            }
+        })
+
+    </script>
+    <style type="text/css">
+        .expander{border:1px solid black;width:250px;}
+        .expander > .title{background-color:black;color:white;padding:.1em .3em;cursor:pointer;}
+        .expander > .body{padding:.1em .3em;}
+    </style>
+</head>
+<body>
+    <div ng-controller="dirCtrl">
+        <accordion>
+            <expander class="expander" ng-repeat="expander in expanders" expander-title="expander.title">
+                {{expander.text}}
+            </expander>
+        </accordion>
+    </div>
+</body>
+</html>
