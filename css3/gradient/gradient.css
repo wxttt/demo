@@ -1,0 +1,36 @@
+ul {
+    overflow: hidden;
+    margin-top: 20px;
+}
+li{
+    width: 80px;
+    list-style:none;
+    height: 80px;
+    margin-bottom: 10px;
+    float: left;
+    margin-right: 5px;
+    background: #ace;
+    /*Controls the size*/
+    /*-webkit-background-size: 20px 20px;*/
+    /*-moz-background-size: 20px 20px;*/
+    /*background-size: 20px 20px;*/
+}
+
+li.gradient1 {
+    /*background-image:-moz-linear-gradient(top,#ccc,#000);*/
+    background-image:-webkit-linear-gradient(-45deg,transparent 0px,transparent 7px, #a0a0a0 6px);
+}
+
+li.gradient2 {
+    /*background-image:-webkit-linear-gradient(,#ccc,#000);*/
+    background-image:-webkit-gradient(linear,0 0,100% 100%,from(#ccc),to(#000));
+
+}
+
+li.gradient3{
+    background: -webkit-linear-gradient(left, #ace, #f96 5%, #ace, #f96 95%, #ace);
+}
+
+li.gradient4{
+    background-image:-webkit-linear-gradient(-45deg,#a0a0a0,#a0a0a0 35%,transparent 35%,transparent,transparent 65%,#a0a0a0 65%, #a0a0a0);
+}
