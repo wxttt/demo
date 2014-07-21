@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app='ngQuickDateDemo'>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>日历</title>
+</head>
+<body>
+    <div ng-controller="DemoCtrl">
+        <quick-datepicker></quick-datepicker>
+    </div>
+<script type="text/javascript" src="../angular.js"></script>
+<script type="text/javascript" src="dist/date.js"></script>
+<script type='text/javascript'>
+    var app = angular.module("ngQuickDateDemo", ["ngQuickDate"]);
+
+    app.controller("DemoCtrl", function($scope) {
+        $scope.myDate = null
+        $scope.setToToday = function() { $scope.myDate = new Date(); }
+    });
+</script>
+</body>
+</html>
