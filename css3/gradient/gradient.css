@@ -34,3 +34,14 @@ li.gradient3{
 li.gradient4{
     background-image:-webkit-linear-gradient(-45deg,#a0a0a0,#a0a0a0 35%,transparent 35%,transparent,transparent 65%,#a0a0a0 65%, #a0a0a0);
 }
+
+
+li.gradient5{
+    width:9px;height:8px;
+    background:-webkit-linear-gradient(45deg,rgba(0,0,0,0) 0px,rgba(0,0,0,0) 5px,#666 5px,#666 7px,rgba(0,0,0,0) 7px),-webkit-linear-gradient(-45deg,rgba(0,0,0,0) 0px,rgba(0,0,0,0) 5px,#666 5px,#666 7px,rgba(0,0,0,0) 7px);
+}
+
+li.gradient6{
+    width:7px;height:8px;
+    background:-webkit-linear-gradient(45deg, rgba(0,0,0,0) 0px,rgba(0,0,0,0) 4px,#666 4px,#666 6px,rgba(0,0,0,0) 6px);
+}
