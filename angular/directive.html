@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>最简单的指令</title>
+    <script type="text/javascript" src="./angular.js"></script>
+    <script type="text/javascript">
+        angular.module('myApp', [])
+                .directive('myDirective', function() {
+                    return {
+                        restrict: 'A',
+                        replace: true,
+                        scope: {
+                            myUrl: '=someAttr', // 经过了修改
+                            someAttr: '=',
+                            myLinkText: '@'
+                        },
+                        template: '<div><label>My Url Field:</label><input type="text" ng-model="myUrl" /><a href="{{myUrl}}">{{myLinkText}}</a></div>'
+                            };
+                    });
+
+    </script>
+</head>
+<body ng-app="myApp">
+<label>Their URL field:</label>
+<input type="text" ng-model="theirUrl">
+<div my-directive
+     some-attr="theirUrl"
+     my-link-text="Click me to go to Google"></div>
+</body>
+</html>
